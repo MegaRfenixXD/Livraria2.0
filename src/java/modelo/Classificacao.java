@@ -7,6 +7,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,32 +18,24 @@ import javax.persistence.OneToMany;
 
 /**
  *
- * @author dappo
+ * @author Aluno
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Genero.findAll", query = "SELECT g FROM Genero g"),
-    @NamedQuery(name = "Genero.findFilter", query = "SELECT g FROM Genero g WHERE g.genero like :filtro")
+    @NamedQuery(name = "Classificacao.findAll", query = "SELECT c FROM Classificacao c"),
+    @NamedQuery(name = "Classificacao.findFilter", query = "SELECT c FROM Classificacao c WHERE c.classificacao like :filtro")
 })
-public class Genero implements Serializable {
+public class Classificacao implements Serializable {
 
-    @OneToMany(mappedBy = "genero")
+    @OneToMany(mappedBy = "classificacao")
     private List<Livro> livros;
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    private String genero;
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
+    @Column
+    private String classificacao;
 
     public Long getId() {
         return id;
@@ -51,6 +44,16 @@ public class Genero implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getClassificacao() {
+        return classificacao;
+    }
+
+    public void setClassificacao(String classificacao) {
+        this.classificacao = classificacao;
+    }
+    
+    
 
     @Override
     public int hashCode() {
@@ -62,10 +65,10 @@ public class Genero implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Genero)) {
+        if (!(object instanceof Classificacao)) {
             return false;
         }
-        Genero other = (Genero) object;
+        Classificacao other = (Classificacao) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -74,7 +77,7 @@ public class Genero implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Genero[ id=" + id + " ]";
+        return "modelo.Classificacao[ id=" + id + " ]";
     }
     
 }
